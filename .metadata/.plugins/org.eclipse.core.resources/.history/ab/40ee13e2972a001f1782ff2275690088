@@ -1,0 +1,87 @@
+package clases;
+
+public class ArregloNotas {
+	int[] nota = {11, 10, 16, 18, 15, 13, 20, 12, 19, 17};
+	
+	public ArregloNotas() {
+		
+	}
+	
+	
+	public int tamaño() {
+		return nota.length;
+	}
+	public int obtener(int o) {
+		return nota[o];
+	}
+	public double notaPromedio() {
+		int sum=0;
+		for(int i=0; i<tamaño(); i++) {
+			sum+=nota[i];
+		}
+		
+		return sum / tamaño();
+	}
+	public int notaMayor() {
+		int nt=0;
+		for(int i=0; i<tamaño(); i++) {
+			if(nota[i]>nt)
+				nt=nota[i];
+		}
+		return nt;
+	}
+	public int notaMenor() {
+		int nt=notaMayor();
+		for(int i=0; i<tamaño(); i++) {
+			if(nota[i]<nt)
+				nt=nota[i];
+		}
+		return nt;
+	}
+	public int cantNotasAprobatorias() {
+		int cant=0;
+		for(int i=0; i<tamaño(); i++) {
+			if(nota[i]>=13)
+				cant++;
+		}
+		return cant;
+	}
+	public int cantNotasDesaprobatorias() {
+		return tamaño() - cantNotasAprobatorias();
+	}
+	
+	public int cantNotasMayoresA15() {
+		int cant=0;
+		for(int i=0; i<tamaño(); i++) {
+			if(nota[i]>15)
+				cant++;
+		}
+		return cant;
+	}
+	
+	public int posPrimeraNotaAprobatoria() {
+		for(int i=0; i<tamaño(); i++) {
+			if(nota[i]>=12)
+				return i;
+		}
+		return -1;
+	}
+	
+	public int posPenultimaNotaDesaprobatoria() {
+		for(int i=0; i<tamaño(); i++) {
+			if(nota[i]>=12)
+				return i;
+		}
+		return -1;
+	}
+	
+	private int aleatorio(int min, int max) {
+		return (int) (((max-min+1) * Math.random()) -min);
+	}
+	public void generarNotas() {
+		for(int i=0; i<tamaño(); i++) {
+			nota[i]=aleatorio(0, 20);
+		}
+	}
+	
+}

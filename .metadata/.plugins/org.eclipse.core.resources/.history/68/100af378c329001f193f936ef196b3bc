@@ -1,0 +1,95 @@
+package guis;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import clases.ArregloEdades;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Main extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField;
+	private JLabel lblNewLabel;
+	private JButton btnProcesar;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main frame = new Main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Main() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 480, 539);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("N° en la pocision: ");
+		lblNewLabel.setBounds(10, 11, 102, 14);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(106, 8, 238, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(365, 7, 89, 23);
+		contentPane.add(btnProcesar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 51, 444, 438);
+		contentPane.add(scrollPane);
+		
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(e);
+		}
+	}
+	protected void actionPerformedBtnProcesar(ActionEvent e) {
+		ArregloEdades a = new ArregloEdades();
+		
+		textArea.setText("Tamaño: " + a.getTamaño() + "\n");
+		
+		textArea.append("Promedio edades: " + a.gerPromedio() + "\n");
+		textArea.append("Edad Mayor: " + a.edadMayor() + "\n");
+		textArea.append("Edad menor: " + a.edadMenor() + "\n");
+		textArea.append("Mayores de edad: " + a.cantidadMayoresEdad() + "\n");
+		textArea.append("Menores de edad: " + a.cantidadMenoresEdad() + "\n");
+		
+		
+	}
+}
